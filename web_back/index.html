@@ -17,8 +17,13 @@
     <div class="sider">
         <a href="#" class="logo"><img src="images/logo02.png" alt="logo"></a>
         <div class="user_info">
-            <img src="images/2.jpg" alt="person">
-            <span>欢迎&nbsp;&nbsp;李思思</span>
+            <!-- <img src="images/2.jpg" alt="person"> -->
+            <!-- 给img标签添加类名，用户获取用户头像信息 -->
+            <img class="userImg" src="images/2.jpg" alt="person">
+            <!-- <span>欢迎&nbsp;&nbsp;李思思</span> -->
+            <!-- 给用户名添加标签及类名，用于获取用户名信息 -->
+            <span>欢迎&nbsp;&nbsp;<i id="userName">李思思</i></span>
+
             <b>管理员</b>
         </div>
         <div class="menu">
@@ -43,7 +48,9 @@
         </form>
         <div class="user_center_link">
             <a href="user.html" onclick="setMenu(3,0)" target="main_frame">个人中心</a>
-            <img src="images/2.jpg" alt="person">
+            <!-- 获取个人中心用户头像并显示 -->
+            <!-- <img src="images/2.jpg" alt="person"> -->
+            <img class="userImg" src="images/2.jpg" alt="person">
             <!--阻止a标签跳转,给a标签添加类名注册点击事件实现退出功能-->
             <!-- <a href="#"><i class="iconfont icon-tuichu"></i> 退出</a> -->
             <a href="javascript:;" id="btnLogout"><i class="iconfont icon-tuichu"></i> 退出</a>
@@ -108,8 +115,9 @@
         }
     </script>
     <script>
-        //定义一个对象，用户退出语义话
+        //定义一个对象，
         var user = {
+            //用户退出语义话
             logout: function() {
                 //请求退出接口
                 $.post('http://192.168.1.106:8000/admin/logout').then(function(res) {
@@ -120,6 +128,19 @@
                         window.location.href = "./login.html"
                     } else {
                         alert(res.msg)
+                    }
+                })
+            },
+            //获取用户信息语义话
+            getInfo: function() {
+                $.get('http://192.168.1.106:8000/admin/getuser').then(function(res) {
+                    console.log(res);
+                    //判断
+                    if (res.code === 200) {
+                        //获取用户名信息
+                        $('#userName').text(res.data.nickname)
+                            //获取用户头像
+                        $('.userImg').attr('src', res.data.user_pic)
                     }
                 })
             }
@@ -135,6 +156,10 @@
             //调用,  用户退出
             user.logout()
         })
+
+        //获取管理员信息，并显示
+        //调用
+        user.getInfo()
     </script>
 </body>
 
