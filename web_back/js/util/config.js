@@ -4,7 +4,12 @@
 var BASEURL = 'http://192.168.1.110:8000'
     //保存接口信息
 var APILIST = {
+    //用户登陆
     user_login: BASEURL + '/admin/login',
+    //用户退出
     user_logout: BASEURL + '/admin/logout',
-    user_getInfo: BASEURL + '/admin/getuser'
+    //获取用户信息（头像用户名）
+    user_getInfo: BASEURL + '/admin/getuser',
+    //获取文章分类
+    category_get: BASEURL + '/admin/category_search'
 }
