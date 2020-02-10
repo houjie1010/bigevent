@@ -11,5 +11,8 @@ var APILIST = {
     //获取用户信息（头像用户名）
     user_getInfo: BASEURL + '/admin/getuser',
     //获取文章分类
-    category_get: BASEURL + '/admin/category_search'
+    category_get: BASEURL + '/admin/category_search',
+    //添加文章分类
+    category_add: BASEURL + '/admin/category_add'
+
 }
